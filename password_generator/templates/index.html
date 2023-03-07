@@ -1,0 +1,14 @@
+
+
+<h1>Security Questions</h1>
+<form method="post" action="{% url 'password_app:index' %}">
+    {% csrf_token %}
+    {% for question in questions %}
+        <p>{{ question.question }}</p>
+        {% for answer in question.answers %}
+            <input type="radio" id="{{ question.question }}-{{ answer }}" name="answer{{ forloop.parentloop.counter }}" value="{{ answer }}">
+            <label for="{{ question.question }}-{{ answer }}">{{ answer }}</label>
+        {% endfor %}
+    {% endfor %}
+    <input type="submit" value="Generate Passwords">
+</form>
